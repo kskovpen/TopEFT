@@ -5,7 +5,7 @@ This directory contains EFT specific modifications and addons for cms-sw/genprod
 ```
 mkdir your_favorite_name
 cd your_favorite_name
-git clone git@github.com:cms-analysis/TopEFT.git
+git clone git@github.com:cms-top/TopEFT.git
 cd TopEFT/mcgeneration/
 ```
 

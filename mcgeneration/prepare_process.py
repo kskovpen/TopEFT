@@ -25,19 +25,20 @@ assert os.path.isdir("./addons/models/%s"%model_name), \
 		"ERROR: could not find model with name %s in ./addons/models/!"%model_name
 
 if os.path.isfile(working_dir+"/proc_card.dat"):
-	print("WARNING, %s/proc_card.dat already exists! OVERWRITING!!!!"%working_dir)
+    print("WARNING, %s/proc_card.dat already exists! OVERWRITING!!!!"%working_dir)
 proc_card_ = open(working_dir+"/proc_card.dat","w")
 proc_card_.write("import model %s \n"%model_name)
 if flavour_scheme == "5F" or flavour_scheme == "5f":
-	print("--> Using 5F scheme")
-	proc_card_.write("define p = p b b~ \n")
-	proc_card_.write("define j = p \n")
+    print("--> Using 5F scheme")
+    proc_card_.write("define p = p b b~ \n")
+    proc_card_.write("define j = p \n")
 else:
-	print("--> Using 4F scheme")
+    print("--> Using 4F scheme")
 proc_card_.write("define l+ = e+ mu+ ta+ \n")
 proc_card_.write("define l- = e- mu- ta- \n")
 proc_card_.write("define vl = ve vm vt \n")
 proc_card_.write("define vl~ = ve~ vm~ vt~ \n")
+proc_card_.write("define lvl = ve vm vt e- mu- ve~ vm~ vt~ e+ mu+ ta- ta+ \n")
 for line in processes:
 	proc_card_.write("%s \n"%line)
 proc_card_.write("output SUBSETUP \n")

@@ -22,6 +22,8 @@ else
     for COPY in addons submit_gridpack_EFT.sh ProduceLHE_condor.py MergeLHE.sh ; do 
 	cp -r ${EFTMCPATH}/${COPY} ${GENPRODPATH}/bin/MadGraph5_aMCatNLO/.
     done
+    
+    chmod u+x ${GENPRODPATH}/bin/MadGraph5_aMCatNLO/submit_gridpack_EFT.sh
 
     # add mg5_amc@nlo patches which are not yet in geproductions
     # suppress error messages as there might be no special mg5 patches and error messages are confusing  

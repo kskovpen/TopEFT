@@ -4,13 +4,7 @@ import numpy as np
 from pprint import pprint
 import random
 import itertools
-
-
-
-
-
-
-
+import csv
 
 #******************************************************
 #
@@ -33,7 +27,7 @@ import itertools
 #
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-tag = "Initial_Test"
+tag = "eft_test"
 
 
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -66,9 +60,17 @@ model_name = "dim6top_LO_UFO"
 #
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+# define p = p b b~
+# define j = j b b~
+# define partl = ve vm vt e- mu- ve~ vm~ vt~ e+ mu+ ta- ta+
+
 processes = [
-	"generate p p > t t~ / a z h w+ DIM6=1 , (t > w+ b DIM6=0, w+ > l+ vl DIM6=0), (t~ > w- b~ DIM6=0, w- > l- vl~ DIM6=0)"
-	#,"add process p p > t t~ j / a z h w+ DIM6=1 , (t > w+ b DIM6=0, w+ > l+ vl DIM6=0), (t~ > w- b~ DIM6=0, w- > l- vl~ DIM6=0)"
+"generate p p > t b~ j $$ w+ w- DIM6<=1 FCNC=0 @0",
+"add process p p > t~ b j $$ w+ w- DIM6<=1 FCNC=0 @1"
+# "generate p p > t t~ > b b~ lvl lvl lvl lvl a DIM6=1"
+#"generate p p > t t~ > b b~ e+ e- ve ve~ a DIM6=1"
+# "generate p p > t t~ / a z h w+ DIM6=1 , (t > w+ b DIM6=0, w+ > l+ vl DIM6=0), (t~ > w- b~ DIM6=0, w- > l- vl~ DIM6=0)"
+# ,"add process p p > t t~ j / a z h w+ DIM6=1 , (t > w+ b DIM6=0, w+ > l+ vl DIM6=0), (t~ > w- b~ DIM6=0, w- > l- vl~ DIM6=0)"
 ]
 
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -109,11 +111,26 @@ flavour_scheme = "5F" # or "4F"
 #
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-operators = ["ctG","ctGI","ctW","ctWI"]
+operators_all = []
 
-baseline_values = ["1.0","1.0","1.0","1.0"]
+with open('parameters.csv') as par_file:
+    par_reader = csv.reader(par_file, delimiter=',')
+    for row in par_reader:
+        operators_all.append(row[0])
+
+#operators = []
+operators = ['ctW', 'ctWI']
+if len(operators) == 0: 
+    operators = operators_all
+
+assert all(x in operators_all for x in operators), \
+"ERROR: requested operators are not defined in the model"
+    
+baseline_values = []
+for o in operators: baseline_values.append('0.0')
+    
 assert len(baseline_values) == len(operators), \
-	"ERROR: length of baseline_values should be the same as that of operators"
+"ERROR: length of baseline_values should be the same as that of operators"
 
 
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -142,7 +159,9 @@ assert len(baseline_values) == len(operators), \
 #          |
 #          \/	
 	
-reweighting_strategy = ["minimal","custom"]
+#reweighting_strategy = ["minimal","custom"]
+#reweighting_strategy = ["no_reweights"]
+reweighting_strategy = ["individual"]
 
 #     /\  		  /\	
 #     |   	 	   | 
@@ -153,9 +172,6 @@ reweighting_strategy = ["minimal","custom"]
 assert all(x in ["no_reweights","individual","rnd_scan","grid","custom","minimal"] for x in reweighting_strategy), \
 	"ERROR: the reweighting_strategy needs to be no_reweights, individual, rnd_scan, grid, minimal or custom"
 #assert reweighting_strategy in ["no_reweights","individual","rnd_scan","grid","custom"]
-		
-		
-
 
 # small helper function to create weight names
 def translate_weight_name(operators,values):
@@ -186,12 +202,9 @@ def translate_weight_name(operators,values):
 #
 # * - * - * - * - 
 
-points_individual = [
-		[-2.,-1.,1.,2.],
-		[-2.,-1.,1.,2.],
-		[-2.,-1.,1.,2.],
-		[-2.,-1.,1.,2.],
-	]
+points_individual = []
+for o in operators:
+    points_individual.append([-2., -1., 1., 2.])
 
 if reweighting_strategy == "individual":
 	assert len(points_individual) == len(operators), \
@@ -319,15 +332,15 @@ order = 2
 # * - * - * - * - 
 
 boundaries_and_npoints = [
-	[-2.,2.,5],
-	[-2.,2.,5],
-	[-2.,2.,5],
-	[-2.,2.,5],
+  [-2.,2.,5],
+  [-2.,2.,5],
+  [-2.,2.,5],
+  [-2.,2.,5],
 ]
 
 if reweighting_strategy == "grid":
-	assert len(boundaries_and_npoints) == len(operators), \
-			"ERROR: length of boundaries_and_npoints should be the same as that of operators"
+    assert len(boundaries_and_npoints) == len(operators), \
+    "ERROR: length of boundaries_and_npoints should be the same as that of operators"
 
 
 

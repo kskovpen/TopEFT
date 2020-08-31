@@ -24,8 +24,11 @@ for ISETUPTAG in `seq 0 ${NSETUPTAG}`; do
     #rm -rf addons/cards/${SETUP} 
 	# prepare card files 
     #mkdir -p addons/cards/${SETUP}
-    for CARD in run_card proc_card customizecards reweight_card; do 
-		mv addons/cards/${SETUP}/${CARD}.dat  addons/cards/${SETUP}/${SETUP}_${CARD}.dat
+    cards = ( run_card proc_card customizecards reweight_card madspin_card )
+    for CARD in cards; do
+      if test -f ${CARD}; then
+        mv addons/cards/${SETUP}/${CARD}.dat  addons/cards/${SETUP}/${SETUP}_${CARD}.dat
+      fi
     done 
     sed -i -e "s|SUBSETUP|${SETUP}|g" addons/cards/${SETUP}/${SETUP}_*.dat 
     

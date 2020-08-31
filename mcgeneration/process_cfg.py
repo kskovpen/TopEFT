@@ -101,7 +101,7 @@ flavour_scheme = "5F" # or "4F"
 #
 #   MADSPIN DECAYS
 #
-# You can switch on decays with MadSpin with putting 'yes'
+# You can switch on decays with MadSpin by putting 'yes'
 #
 # By default the MadSpin configuration is:
 #

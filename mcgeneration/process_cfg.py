@@ -65,8 +65,10 @@ model_name = "dim6top_LO_UFO"
 # define partl = ve vm vt e- mu- ve~ vm~ vt~ e+ mu+ ta- ta+
 
 processes = [
-"generate p p > t b~ j $$ w+ w- DIM6<=1 FCNC=0 @0",
-"add process p p > t~ b j $$ w+ w- DIM6<=1 FCNC=0 @1"
+#"generate p p > t b~ j $$ w+ w- DIM6<=1 FCNC=0 @0",
+#"add process p p > t~ b j $$ w+ w- DIM6<=1 FCNC=0 @1"
+"generate p p > t b~ j $$ w+ w- DIM6<=1 FCNC=0 @0, (t > w+ b, w+ > l+ vl)",
+"add process p p > t~ b j $$ w+ w- DIM6<=1 FCNC=0 @1, (t~ > w- b~, w- > l- vl~)"
 # "generate p p > t t~ > b b~ lvl lvl lvl lvl a DIM6=1"
 #"generate p p > t t~ > b b~ e+ e- ve ve~ a DIM6=1"
 # "generate p p > t t~ / a z h w+ DIM6=1 , (t > w+ b DIM6=0, w+ > l+ vl DIM6=0), (t~ > w- b~ DIM6=0, w- > l- vl~ DIM6=0)"
@@ -119,7 +121,7 @@ flavour_scheme = "5F" # or "4F"
 # 
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-madspin_decays = "yes" # or "no"
+madspin_decays = "no" # or "no"
 
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 #

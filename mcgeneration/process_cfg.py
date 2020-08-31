@@ -97,6 +97,29 @@ processes = [
 
 flavour_scheme = "5F" # or "4F"
 
+#*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+#
+#   MADSPIN DECAYS
+#
+# You can switch on decays with MadSpin with putting 'yes'
+#
+# By default the MadSpin configuration is:
+#
+# set Nevents_for_max_weigth 250
+# set max_weight_ps_point 400
+# set max_running_process 1
+#
+# define ell+ = e+ mu+ ta+
+# define ell- = e- mu- ta-
+
+# decay t > w+ b, w+ > ell+ vl
+# decay t~ > w- b~, w- > ell- vl~
+# decay w+ > ell+ vl
+# decay w- > ell- vl~
+# 
+#*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+madspin_decays = "yes" # or "no"
 
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 #

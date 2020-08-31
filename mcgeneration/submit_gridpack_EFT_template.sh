@@ -26,7 +26,7 @@ for ISETUPTAG in `seq 0 ${NSETUPTAG}`; do
     #mkdir -p addons/cards/${SETUP}
     cards=( run_card proc_card customizecards reweight_card madspin_card )
     for CARD in cards; do
-      if test -f ${CARD}; then
+      if test -f "addons/cards/${SETUP}/${CARD}.dat"; then
         mv addons/cards/${SETUP}/${CARD}.dat  addons/cards/${SETUP}/${SETUP}_${CARD}.dat
       fi
     done 

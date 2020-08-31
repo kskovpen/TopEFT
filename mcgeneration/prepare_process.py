@@ -88,11 +88,15 @@ print("--> wrote to %s/run_card.dat"%working_dir)
 
 if madspin_decays == 'yes':
     
-    if os.path.isfile(working_dir+"/madpsin_card.dat"):
+    if os.path.isfile(working_dir+"/madspin_card.dat"):
         print("WARNING, %s/madspin_card.dat already exists! OVERWRITING!!!!"%working_dir)
     os.system("cp %s %s"%("./addons/cards/dim6top_LO_UFO_template/madspin_card.dat",working_dir))
 
     print("--> wrote to %s/madspin_card.dat"%working_dir)
+    
+else:
+    
+    os.system("rm -rf "+working_dir+"/madspin_card.dat")
 
 #*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 #
